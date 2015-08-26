@@ -18,6 +18,16 @@ class FileUploader {
 
 	/**
 	 * @param string $input_field_name
+	 * @param string $destination
+	 * @return bool
+	 */
+	public function moveUploadedFile($input_field_name, $destination) {
+		$tmp_name = $this->getTmpName($input_field_name);
+		return move_uploaded_file($tmp_name, $destination);
+	}
+
+	/**
+	 * @param string $input_field_name
 	 * @throws RuntimeException
 	 * @return array ["name" => string, "type" => string, "tmp_name" => string, "error" => int, "size" => int]
 	 */
