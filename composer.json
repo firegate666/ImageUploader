@@ -2,6 +2,14 @@
 	"name": "firegate666/imageuploader",
 	"description": "Utility to support image uploading and base64 encoded images in tags",
 	"license": "Apache-2.0",
+	"type": "library",
+	"authors": [
+		{
+			"name": "Marco Behnke",
+			"email": "marco@behnke.biz",
+			"role": "Developer"
+		}
+	],
 	"autoload": {
 		"psr-0": {
 			"firegate666\\ImageUploader\\": "src/"
