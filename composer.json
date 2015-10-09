@@ -1,6 +1,6 @@
 {
 	"name": "firegate666/imageuploader",
-	"description": "Utility to support image uploading",
+	"description": "Utility to support image uploading and base64 encoded images in tags",
 	"license": "Apache-2.0",
 	"autoload": {
 		"psr-0": {
