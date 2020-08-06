@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace firegate666\ImageUploader;
 
@@ -7,12 +8,12 @@ use RuntimeException;
 class FileUploader {
 
 	/** @var array */
-	protected $uploaded_files;
+	protected array $uploaded_files;
 
 	/**
 	 * @param array $uploaded_files input from $_FILES
 	 */
-	public function __construct($uploaded_files) {
+	public function __construct(array $uploaded_files) {
 		$this->uploaded_files = $uploaded_files;
 	}
 
@@ -21,9 +22,9 @@ class FileUploader {
 	 * @param string $destination
 	 * @return bool
 	 */
-	public function moveUploadedFile($input_field_name, $destination) {
+	public function moveUploadedFile(string $input_field_name, string $destination): bool {
 		$tmp_name = $this->getTmpName($input_field_name);
-		return move_uploaded_file($tmp_name, $destination);
+		return $this->moveUploadedFile($tmp_name, $destination);
 	}
 
 	/**
@@ -31,7 +32,7 @@ class FileUploader {
 	 * @throws RuntimeException
 	 * @return array ["name" => string, "type" => string, "tmp_name" => string, "error" => int, "size" => int]
 	 */
-	public function getUploadedFileData($input_field_name) {
+	public function getUploadedFileData(string $input_field_name): array {
 		$this->validate($input_field_name);
 
 		$uploaded_file_data = $this->uploaded_files[$input_field_name];
@@ -39,19 +40,19 @@ class FileUploader {
 	}
 
 	/**
-	 * @param $input_field_name
+	 * @param string $input_field_name
 	 * @return mixed
 	 */
-	public function getUploadedFileSize($input_field_name) {
+	public function getUploadedFileSize(string $input_field_name): int {
 		$uploaded_file_data = $this->getUploadedFileData($input_field_name);
 		return $uploaded_file_data['size'];
 	}
 
 	/**
-	 * @param $input_field_name
+	 * @param string $input_field_name
 	 * @return mixed
 	 */
-	protected function getTmpName($input_field_name) {
+	protected function getTmpName(string $input_field_name): string {
 		$uploaded_file_data = $this->getUploadedFileData($input_field_name);
 		return $uploaded_file_data['tmp_name'];
 	}
@@ -61,7 +62,7 @@ class FileUploader {
 	 * @throws RuntimeException
 	 * @return void
 	 */
-	public function validate($input_field_name) {
+	public function validate(string $input_field_name): void {
 		if (!array_key_exists($input_field_name, $this->uploaded_files)) {
 			throw new RuntimeException("No file was uploaded", UPLOAD_ERR_NO_FILE);
 		}

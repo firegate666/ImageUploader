@@ -14,5 +14,9 @@
 		"psr-0": {
 			"firegate666\\ImageUploader\\": "src/"
 		}
+	},
+	"require": {
+		"php": ">=7.4",
+		"ext-gd": "*"
 	}
 }

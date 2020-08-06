@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace firegate666\ImageUploader;
 
@@ -13,7 +14,7 @@ class ImageUploader extends FileUploader {
 	 * @param string $input_field_name
 	 * @return string
 	 */
-	public function getMimeType($input_field_name) {
+	public function getMimeType(string $input_field_name): string {
 		return $this->getImageData($input_field_name)['mime'];
 	}
 
@@ -21,7 +22,7 @@ class ImageUploader extends FileUploader {
 	 * @param string $input_field_name
 	 * @return int
 	 */
-	public function getWidth($input_field_name) {
+	public function getWidth(string $input_field_name): int {
 		return $this->getImageData($input_field_name)['width'];
 	}
 
@@ -29,7 +30,7 @@ class ImageUploader extends FileUploader {
 	 * @param string $input_field_name
 	 * @return int
 	 */
-	public function getHeight($input_field_name) {
+	public function getHeight(string $input_field_name): int {
 		return $this->getImageData($input_field_name)['height'];
 	}
 
@@ -38,7 +39,7 @@ class ImageUploader extends FileUploader {
 	 * @throws RuntimeException
 	 * @return string
 	 */
-	public function getBase64EncodedImageData($input_field_name) {
+	public function getBase64EncodedImageData(string $input_field_name): string {
 		$image_data = $this->getImageData($input_field_name);
 
 		// base64 encode the binary data, then break it into chunks according to RFC 2045 semantics
@@ -51,7 +52,7 @@ class ImageUploader extends FileUploader {
 	 * @throws RuntimeException
 	 * @return array ["filename" => string, "content" => string, "width" => int, "height" => int]
 	 */
-	protected function getImageData($input_field_name) {
+	protected function getImageData(string $input_field_name): array {
 		$filename = $this->getTmpName($input_field_name);
 		$size_data = getimagesize($filename);
 
